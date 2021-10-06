@@ -14,8 +14,11 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.16.1",
+    "express-session": "^1.17.2",
     "mongodb": "^3.6.1",
-    "node": "12.18.0"
+    "node": "12.18.0",
+    "passport": "^0.5.0",
+    "pug": "^3.0.2"
   },
   "repository": {
     "type": "git",
@@ -29,7 +32,5 @@
     "socketio"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+  "devDependencies": {}
 }
