@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 module.exports = (app, myDataBase) => {
     app.route('/').get((req, res) => {
-        res.render(`${process.cwd()}/views/pug`, {
+        res.render(`pug`, {
             title: 'Connected to database',
             message: 'Please login',
             showLogin: true,
@@ -20,6 +20,10 @@ module.exports = (app, myDataBase) => {
     app.route('/logout').get((req, res) => {
         req.logout();
         res.redirect('/');
+    })
+
+    app.route('/chat').get(ensureAuthenticated, (req, res) => {
+        res.render(`pug/chat`, {user: req.user})
     })
 
     app.route('/profile').get(ensureAuthenticated, (req, res) => {
@@ -62,7 +66,8 @@ module.exports = (app, myDataBase) => {
 
     app.route('/auth/github/callback').get(passport.authenticate('github', { failureRedirect: '/' }), (req, res) => {
         console.log(`github auth successfull`)
-        res.redirect('/profile');
+        req.session.user_id = req.user.id
+        res.redirect('/chat');
     })
 
 
